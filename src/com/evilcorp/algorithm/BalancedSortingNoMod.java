@@ -6,9 +6,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 
-import com.evilcorp.algorithm.nomod.BalancedMergerNoMod;
-import com.evilcorp.algorithm.nomod.RunGeneratorNoMod;
 import com.evilcorp.classes.SortAlgorithm;
+import com.evilcorp.algorithm.nomod.RunGeneratorNoMod;
+import com.evilcorp.algorithm.nomod.BalancedMergerNoMod;
 
 import static com.evilcorp.algorithm.nomod.BalancedMergerNoMod.countTotalRuns;
 

@@ -4,6 +4,7 @@ import java.nio.file.Path;
 
 import com.evilcorp.algorithm.BalancedSortingMod;
 import com.evilcorp.algorithm.BalancedSortingNoMod;
+import com.evilcorp.algorithm.ExternalSortAi;
 import com.evilcorp.classes.SortAlgorithm;
 import com.evilcorp.filegenerator.LargeFileGenerator;
 
@@ -45,7 +46,8 @@ public class Main {
                     String inputFile = args[1].split("=")[1];
                     System.out.println(inputFile);
                     String outputFile = args[2].split("=")[1];
-                    System.out.println(outputFile);
+
+                    System.out.println(algorithmType);
 
                     SortAlgorithm algorithm;
 
@@ -53,7 +55,9 @@ public class Main {
                         algorithm = new BalancedSortingMod(PATH_DIRECTORY_INPUT, PATH_DIRECTORY_OUTPUT);
                     } else if (algorithmType.equals("nomod")) {
                         algorithm = new BalancedSortingNoMod(PATH_DIRECTORY_INPUT, PATH_DIRECTORY_OUTPUT);
-                    } else {
+                    } else if (algorithmType.equals("ai")) {
+                        algorithm = new ExternalSortAi(PATH_DIRECTORY_INPUT, PATH_DIRECTORY_OUTPUT);
+                    }  else {
                         System.out.println("Unknown sorting algorithm: " + algorithmType);
                         return;
                     }
