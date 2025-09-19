@@ -42,7 +42,7 @@ public class BalancedSortingMod implements SortAlgorithm {
                 targets[i] = new File(pathTempDir.toFile(), "target_" + System.currentTimeMillis() + "_" + i + ".txt");
             }
 
-            BalancedMergerMod merger = new BalancedMergerMod(N, pathTempDir.toFile());
+            BalancedMergerMod merger = new BalancedMergerMod(N);
             l = merger.merge(sources, targets);
             System.out.println("Кількість джерел після злиття: " + l);
 

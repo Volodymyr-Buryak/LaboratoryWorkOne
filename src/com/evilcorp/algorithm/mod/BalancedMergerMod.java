@@ -1,16 +1,18 @@
 package com.evilcorp.algorithm.mod;
 
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import com.evilcorp.classes.FileItem;
-
-import java.io.*;
 
 public class BalancedMergerMod {
     private final int n;
-    private final File tempDir;
 
-    public BalancedMergerMod(int n, File tempDir) {
+    public BalancedMergerMod(int n) {
         this.n = n;
-        this.tempDir = tempDir;
     }
 
     public int merge(File[] sources, File[] targets) throws IOException {

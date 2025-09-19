@@ -44,7 +44,7 @@ public class BalancedSortingNoMod implements SortAlgorithm {
                 targets[i] = new File(pathTempDir.toFile(), "target_" + System.currentTimeMillis() + "_" + i + ".txt");
             }
 
-            BalancedMergerNoMod merger = new BalancedMergerNoMod(N, pathTempDir.toFile());
+            BalancedMergerNoMod merger = new BalancedMergerNoMod(N);
             l = merger.merge(sources, targets);
             System.out.println("Кількість серій після злиття: " + l);
 

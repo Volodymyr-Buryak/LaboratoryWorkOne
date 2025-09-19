@@ -1,19 +1,16 @@
 package com.evilcorp.algorithm.nomod;
 
-import com.evilcorp.classes.FileItem;
-
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import com.evilcorp.classes.FileItem;
 
 public class BalancedMergerNoMod {
     private final int N;
-    private final File tempDir;
 
-    public BalancedMergerNoMod(int n, File tempDir) {
+    public BalancedMergerNoMod(int n) {
         this.N = n;
-        this.tempDir = tempDir;
     }
 
     public int merge(File[] sources, File[] targets) throws IOException {
