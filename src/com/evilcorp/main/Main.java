@@ -45,13 +45,20 @@ public class Main {
                 default -> throw new IllegalStateException("Unexpected value: " + commandArgs.get(Command.SORT));
             };
 
+            long start = System.nanoTime();
+
             sortAlgorithm.sortFile(commandArgs.get(Command.INPUT), commandArgs.get(Command.OUTPUT));
+
+            long end = System.nanoTime();
+            long duration = end - start;
+
+            System.out.println("Execution time: " + duration + " ns");
+            System.out.println("Execution time: " + duration / 1_000_000.0 + " ms");
 
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
             e.printStackTrace();
         }
-
     }
 
     private static Map<Command, String> createHashMapArgs(String[] args){
@@ -66,5 +73,4 @@ public class Main {
         }
         return mapArgs;
     }
-
 }

@@ -1,11 +1,11 @@
 package com.evilcorp.algorithm.nomod;
 
-import com.evilcorp.classes.FileItem;
-
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+
+import com.evilcorp.classes.FileItem;
 
 public class RunGeneratorNoMod {
     private final File inputFile;

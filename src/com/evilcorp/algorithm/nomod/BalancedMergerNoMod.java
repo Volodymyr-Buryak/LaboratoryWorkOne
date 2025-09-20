@@ -7,24 +7,24 @@ import java.io.IOException;
 import com.evilcorp.classes.FileItem;
 
 public class BalancedMergerNoMod {
-    private final int N;
+    private final int n;
 
     public BalancedMergerNoMod(int n) {
-        this.N = n;
+        this.n = n;
     }
 
     public int merge(File[] sources, File[] targets) throws IOException {
         // Ініціалізація читачів
-        FileReader[] readers = new FileReader[N];
+        FileReader[] readers = new FileReader[n];
         // Зберігаємо поточні елементи з кожного джерела
-        FileItem[] currentItems = new FileItem[N];
+        FileItem[] currentItems = new FileItem[n];
         // Флаги наявності даних у джерелах
-        boolean[] hasMoreData = new boolean[N];
+        boolean[] hasMoreData = new boolean[n];
 
         // кількість активних джерел
         int k1 = 0;
 
-        for (int i = 0; i < N; i++) {
+        for (int i = 0; i < n; i++) {
             if (sources[i].exists() && sources[i].length() > 0) {
                 readers[i] = new FileReader(sources[i]);
                 currentItems[i] = readNextItem(readers[i]);
@@ -44,14 +44,14 @@ public class BalancedMergerNoMod {
         }
 
         // Ініціалізація приймача
-        FileWriter[] writers = new FileWriter[N];
-        for (int i = 0; i < N; i++) {
+        FileWriter[] writers = new FileWriter[n];
+        for (int i = 0; i < n; i++) {
             writers[i] = new FileWriter(targets[i]);
         }
 
         // Масив індексів активних джерел
         int[] t = new int[k1];
-        for (int i = 0, j = 0; i < N; i++) {
+        for (int i = 0, j = 0; i < n; i++) {
             if (hasMoreData[i]) {
                 t[j++] = i;
             }
@@ -107,7 +107,7 @@ public class BalancedMergerNoMod {
                 }
             }
 
-            j = (j + 1) % N;
+            j = (j + 1) % n;
         }
 
         for (FileReader reader : readers) {

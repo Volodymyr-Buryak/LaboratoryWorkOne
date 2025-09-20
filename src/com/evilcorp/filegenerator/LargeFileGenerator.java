@@ -33,7 +33,7 @@ public final class LargeFileGenerator {
         this.sizeFileInMegabytes = sizeFileInMegabytes;
     }
 
-    private long convertMbToBytes(int sizeInMb) {
+    public static long convertMbToBytes(int sizeInMb) {
         return (long) sizeInMb * BYTES_IN_MB;
     }
 

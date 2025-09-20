@@ -17,7 +17,7 @@ public class BalancedSortingNoMod implements SortAlgorithm {
     private final Path pathOutputFile;
     private final Path pathTempDir;
 
-    private static final int N = 9; // Number of temporary files
+    private static final int N = 2;
 
     public BalancedSortingNoMod(Path inputFile, Path outputFile) throws IOException {
         this.pathInputFile = inputFile;
@@ -36,7 +36,7 @@ public class BalancedSortingNoMod implements SortAlgorithm {
         distributor.distributeRuns();
 
         int l = countTotalRuns(sources);
-        System.out.println("Початкова кількість серій: " + l);
+        System.out.println("Initial number of series: " + l);
 
         while (l > 1) {
             File[] targets = new File[N];
@@ -46,7 +46,7 @@ public class BalancedSortingNoMod implements SortAlgorithm {
 
             BalancedMergerNoMod merger = new BalancedMergerNoMod(N);
             l = merger.merge(sources, targets);
-            System.out.println("Кількість серій після злиття: " + l);
+            System.out.println("Number of series after merger: " + l);
 
             // Видаляємо старі файли-джерела
             deleteFiles(sources);
@@ -57,7 +57,7 @@ public class BalancedSortingNoMod implements SortAlgorithm {
         Files.move(sources[0].toPath(), result.toPath(), StandardCopyOption.REPLACE_EXISTING);
         deleteFiles(sources);
         Files.deleteIfExists(pathTempDir);
-        System.out.println("Сортування звершене. Результат в: " + result.getAbsolutePath());
+        System.out.println("Sorting is complete. Result in: " + result.getAbsolutePath());
     }
 
     private void deleteFiles(File[] files) {

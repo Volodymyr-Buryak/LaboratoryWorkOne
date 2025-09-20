@@ -6,22 +6,24 @@ import java.util.ArrayList;
 import com.evilcorp.classes.FileItem;
 
 public class RunGeneratorMod {
+    private final int sizeBuffer;
     private final File inputFile;
     private final  BufferedWriter[] writers;
 
     private static final long SIZE_OF_RUN_IN_BYTES = 1024 * 1024 * 100; // 100 MB
 
-    public RunGeneratorMod (File inputFile, File[] outputFiles) throws IOException {
+    public RunGeneratorMod (File inputFile, File[] outputFiles, int sizeBuffer) throws IOException {
         this.inputFile = inputFile;
+        this.sizeBuffer = sizeBuffer;
         writers = new BufferedWriter[outputFiles.length];
         for (int i = 0; i < outputFiles.length; i++) {
-            this.writers[i] = new BufferedWriter(new FileWriter(outputFiles[i]));
+            this.writers[i] = new BufferedWriter(new FileWriter(outputFiles[i]), sizeBuffer);
         }
     }
 
     public void distributeRuns() throws IOException {
 
-        try(BufferedReader reader = new BufferedReader(new FileReader(inputFile))) {
+        try(BufferedReader reader = new BufferedReader(new FileReader(inputFile), sizeBuffer)) {
             List<FileItem> buffer = new ArrayList<>();
 
             int currentWriterIndex = 0;
@@ -35,7 +37,6 @@ public class RunGeneratorMod {
 
                 if (currentSize >= SIZE_OF_RUN_IN_BYTES) {
                     writeBufferToWriter(buffer, writers[currentWriterIndex]);
-                    System.out.println("Size buffer in MB: " + currentSize / (1024 * 1024));
                     buffer.clear();
                     currentSize = 0;
                     currentWriterIndex = (currentWriterIndex + 1) % this.writers.length;

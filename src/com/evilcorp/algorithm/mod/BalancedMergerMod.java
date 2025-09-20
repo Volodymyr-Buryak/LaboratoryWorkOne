@@ -10,9 +10,11 @@ import com.evilcorp.classes.FileItem;
 
 public class BalancedMergerMod {
     private final int n;
+    private final int sizeBuffer;
 
-    public BalancedMergerMod(int n) {
+    public BalancedMergerMod(int n, int sizeBuffer) {
         this.n = n;
+        this.sizeBuffer = sizeBuffer;
     }
 
     public int merge(File[] sources, File[] targets) throws IOException {
@@ -28,7 +30,7 @@ public class BalancedMergerMod {
 
         for (int i = 0; i < n; i++) {
             if (sources[i].exists() && sources[i].length() > 0) {
-                readers[i] = new BufferedReader(new FileReader(sources[i]));
+                readers[i] = new BufferedReader(new FileReader(sources[i]), sizeBuffer);
                 currentItems[i] = readNextItem(readers[i]);
                 hasMoreData[i] = (currentItems[i] != null);
                 if (hasMoreData[i]) {
@@ -48,7 +50,7 @@ public class BalancedMergerMod {
         // Ініціалізація приймача
         BufferedWriter[] writers = new BufferedWriter[n];
         for (int i = 0; i < n; i++) {
-            writers[i] = new BufferedWriter(new FileWriter(targets[i]));
+            writers[i] = new BufferedWriter(new FileWriter(targets[i]), sizeBuffer);
         }
 
         // Масив індексів активних джерел
