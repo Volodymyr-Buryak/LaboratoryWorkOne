@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.List;
 import java.util.ArrayList;
 import com.evilcorp.classes.FileItem;
+import java.nio.charset.StandardCharsets;
 
 public class RunGeneratorMod {
     private final int sizeBuffer;
@@ -33,7 +34,7 @@ public class RunGeneratorMod {
             while ((line = reader.readLine()) != null) {
                 FileItem item = FileItem.fromLine(line);
                 buffer.add(item);
-                currentSize += line.getBytes().length;
+                currentSize += line.getBytes(StandardCharsets.UTF_8).length;
 
                 if (currentSize >= SIZE_OF_RUN_IN_BYTES) {
                     writeBufferToWriter(buffer, writers[currentWriterIndex]);

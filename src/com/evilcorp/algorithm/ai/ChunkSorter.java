@@ -15,7 +15,7 @@ import java.io.BufferedWriter;
  */
 
 public class ChunkSorter {
-    private static final int MAX_MEMORY = 100 * 1024 * 1024;
+    private static final int MAX_MEMORY = 100 * 1024 * 1024; // 100 MB
 
     public static List<File> splitAndSort(File input, File tmpDir) throws IOException {
         List<File> chunks = new ArrayList<>();
@@ -24,20 +24,22 @@ public class ChunkSorter {
             int currentSize = 0;
             String line;
 
-            while ((line = br.readLine()) != null) {
+            while ((line = br.readLine()) != null) { // O(n)
                 Record rec = Record.parse(line);
                 buffer.add(rec);
-                currentSize += line.length() * 2; // приблизно в байтах (UTF-16)
+                currentSize += line.length() * 2; // UTF-16
 
-                if (currentSize >= MAX_MEMORY) {
-                    chunks.add(sortAndSave(buffer, tmpDir));
+                if (currentSize >= MAX_MEMORY) { // Буде виконуватися k разів
+                    chunks.add(sortAndSave(buffer, tmpDir)); // O(m log m) m - розмір буфера
                     buffer.clear();
                     currentSize = 0;
                 }
             }
+
             if (!buffer.isEmpty()) {
-                chunks.add(sortAndSave(buffer, tmpDir));
+                chunks.add(sortAndSave(buffer, tmpDir)); // O(m log m)
             }
+
         }
         return chunks;
     }

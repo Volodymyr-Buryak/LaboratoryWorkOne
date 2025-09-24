@@ -38,13 +38,14 @@ public class BalancedSortingNoMod implements SortAlgorithm {
         int l = countTotalRuns(sources);
         System.out.println("Initial number of series: " + l);
 
+        BalancedMergerNoMod merger = new BalancedMergerNoMod(N);
+
         while (l > 1) {
             File[] targets = new File[N];
             for (int i = 0; i < N; i++) {
                 targets[i] = new File(pathTempDir.toFile(), "target_" + System.currentTimeMillis() + "_" + i + ".txt");
             }
 
-            BalancedMergerNoMod merger = new BalancedMergerNoMod(N);
             l = merger.merge(sources, targets);
             System.out.println("Number of series after merger: " + l);
 

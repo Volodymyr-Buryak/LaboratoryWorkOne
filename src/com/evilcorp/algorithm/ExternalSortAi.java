@@ -1,8 +1,8 @@
 package com.evilcorp.algorithm;
 
 import java.io.File;
-import java.nio.file.Path;
 import java.util.List;
+import java.nio.file.Path;
 import java.io.IOException;
 
 import com.evilcorp.algorithm.ai.Merger;
@@ -37,13 +37,17 @@ public class ExternalSortAi implements SortAlgorithm {
         } finally {
             if (chunks != null) {
                 for (File f : chunks) {
-                    if (f.exists()) f.delete();
+                    if (f.exists()) {
+                        f.delete();
+                    }
                 }
             }
             if (tmpDir.exists() && tmpDir.isDirectory()) {
                 File[] leftovers = tmpDir.listFiles();
                 if (leftovers != null) {
-                    for (File f : leftovers) f.delete();
+                    for (File f : leftovers) {
+                        f.delete();
+                    }
                 }
                 tmpDir.delete();
             }

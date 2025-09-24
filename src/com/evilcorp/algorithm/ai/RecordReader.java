@@ -1,11 +1,15 @@
 package com.evilcorp.algorithm.ai;
 
-import java.io.*;
+import java.io.File;
+import java.io.Closeable;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.BufferedReader;
 
 public class RecordReader implements Comparable<RecordReader>, Closeable {
-    private BufferedReader br;
-    private Record current;
     private File file;
+    private Record current;
+    private BufferedReader br;
 
     public RecordReader(File file) throws IOException {
         this.file = file;
@@ -13,6 +17,7 @@ public class RecordReader implements Comparable<RecordReader>, Closeable {
         advance();
     }
 
+    // читаємо перший елемент з файлу (серії)
     private void advance() throws IOException {
         String line = br.readLine();
         if (line != null) {
@@ -38,7 +43,8 @@ public class RecordReader implements Comparable<RecordReader>, Closeable {
 
     @Override
     public int compareTo(RecordReader other) {
-        return other.peek().compareTo(this.peek()); // зворотній порядок
+        // використовуємо compereTo з Record, але в зворотному порядку для max-heap
+        return other.peek().compareTo(this.peek());
     }
 
     @Override

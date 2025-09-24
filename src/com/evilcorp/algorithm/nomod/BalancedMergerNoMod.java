@@ -82,7 +82,7 @@ public class BalancedMergerNoMod {
                 // Записуємо максимальний елемент у поточний приймач
                 writers[j].write(maxItem.toString() + "\n");
 
-                // Чтение следующего элемента из источника
+                // Беремо наступний елемент з того ж джерела
                 int sourceIndex = t[maxIndex];
                 FileItem nextItem = readNextItem(readers[sourceIndex]);
 
