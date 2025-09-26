@@ -39,9 +39,18 @@ public class Main {
             }
 
             SortAlgorithm sortAlgorithm = switch (commandArgs.get(Command.SORT)) {
-                case "nomod" -> new BalancedSortingNoMod(PATH_DIRECTORY_INPUT, PATH_DIRECTORY_OUTPUT);
-                case "mod" -> new BalancedSortingMod(PATH_DIRECTORY_INPUT, PATH_DIRECTORY_OUTPUT);
-                case "ai" -> new ExternalSortAi(PATH_DIRECTORY_INPUT, PATH_DIRECTORY_OUTPUT);
+                case "nomod" -> {
+                    System.out.println("Starting sort without modifications...");
+                    yield new BalancedSortingNoMod(PATH_DIRECTORY_INPUT, PATH_DIRECTORY_OUTPUT);
+                }
+                case "mod" -> {
+                    System.out.println("Starting sort with modifications...");
+                    yield  new BalancedSortingMod(PATH_DIRECTORY_INPUT, PATH_DIRECTORY_OUTPUT);
+                }
+                case "ai" -> {
+                    System.out.println("Starting AI-based sort...");
+                    yield new ExternalSortAi(PATH_DIRECTORY_INPUT, PATH_DIRECTORY_OUTPUT);
+                }
                 default -> throw new IllegalStateException("Unexpected value: " + commandArgs.get(Command.SORT));
             };
 
@@ -73,4 +82,5 @@ public class Main {
         }
         return mapArgs;
     }
+
 }

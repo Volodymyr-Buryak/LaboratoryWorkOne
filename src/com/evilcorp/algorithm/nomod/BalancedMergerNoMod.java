@@ -7,6 +7,7 @@ import java.io.IOException;
 import com.evilcorp.classes.FileItem;
 
 public class BalancedMergerNoMod {
+
     private final int n;
 
     public BalancedMergerNoMod(int n) {
@@ -64,7 +65,7 @@ public class BalancedMergerNoMod {
 
         while (k1 > 0) {
             L++;
-            // Кількість активних джерел на початок слияния серії
+            // Кількість активних джерел на початок злиття серії
             int k2 = k1;
 
             while (k2 > 0) {
