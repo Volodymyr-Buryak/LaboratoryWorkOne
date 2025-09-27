@@ -36,6 +36,8 @@ public class BalancedSortingMod implements SortAlgorithm {
         RunGeneratorMod distributor = new RunGeneratorMod(new File(this.pathInputFile.toString(), inputFileName), sources, sizeBuffer);
         distributor.distributeRuns();
 
+        System.out.println("series are ready");
+
         int l = N;
         System.out.println("Initial number of series: " + l);
 

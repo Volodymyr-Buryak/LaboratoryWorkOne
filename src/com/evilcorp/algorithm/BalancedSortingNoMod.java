@@ -17,7 +17,7 @@ public class BalancedSortingNoMod implements SortAlgorithm {
     private final Path pathOutputFile;
     private final Path pathTempDir;
 
-    private static final int N = 2;
+    private static final int N = 4;
 
     public BalancedSortingNoMod(Path inputFile, Path outputFile) throws IOException {
         this.pathInputFile = inputFile;
@@ -34,6 +34,8 @@ public class BalancedSortingNoMod implements SortAlgorithm {
 
         RunGeneratorNoMod distributor = new RunGeneratorNoMod(new File(this.pathInputFile.toString(), inputFileName) , sources);
         distributor.distributeRuns();
+
+        System.out.println("series are ready");
 
         int l = countTotalRuns(sources);
         System.out.println("Initial number of series: " + l);
